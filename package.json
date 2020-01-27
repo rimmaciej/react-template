@@ -1,0 +1,88 @@
+{
+	"name": "react-template",
+	"description": "React template with custom webpack config and jss",
+	"version": "1.0.0",
+	"main": "src/index.jsx",
+	"license": "MIT",
+	"scripts": {
+		"dev": "webpack-dev-server --host 0.0.0.0 --config webpack/dev.js",
+		"build": "webpack --inline --progress --config webpack/dist.js"
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.8.3",
+		"color": "^3.1.2",
+		"date-fns": "^2.9.0",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"react-icons": "^3.8.0",
+		"react-jss": "^10.0.3",
+		"react-router-dom": "^5.1.2"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.8.3",
+		"@babel/plugin-transform-runtime": "^7.8.3",
+		"@babel/preset-env": "^7.8.3",
+		"@babel/preset-react": "^7.8.3",
+		"babel-eslint": "^10.0.3",
+		"babel-loader": "^8.0.6",
+		"browserslist": "^4.8.5",
+		"clean-webpack-plugin": "^3.0.0",
+		"copy-webpack-plugin": "^5.1.1",
+		"eslint": "^6.8.0",
+		"eslint-plugin-react": "^7.18.0",
+		"eslint-plugin-react-hooks": "^2.3.0",
+		"friendly-errors-webpack-plugin": "^1.7.0",
+		"html-loader": "^0.5.5",
+		"html-webpack-plugin": "^3.2.0",
+		"prop-types": "^15.7.2",
+		"terser-webpack-plugin": "^2.3.2",
+		"webpack": "^4.41.5",
+		"webpack-cli": "^3.3.10",
+		"webpack-dev-server": "^3.10.1",
+		"webpack-merge": "^4.2.2"
+	},
+	"browserslist": [
+		">1%",
+		"not ie 11",
+		"not op_mini all"
+	],
+	"babel": {
+		"presets": [
+			"@babel/preset-env",
+			"@babel/preset-react"
+		],
+		"plugins": [
+			"@babel/plugin-transform-runtime"
+		]
+	},
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"es6": true,
+			"node": true
+		},
+		"extends": [
+			"eslint:recommended",
+			"plugin:react/recommended"
+		],
+		"globals": {
+			"Atomics": "readonly",
+			"SharedArrayBuffer": "readonly",
+			"API_URL": "readonly",
+			"workbox": "readonly"
+		},
+		"parser": "babel-eslint",
+		"parserOptions": {
+			"ecmaVersion": 2019,
+			"sourceType": "module"
+		},
+		"plugins": [
+			"react",
+			"react-hooks"
+		],
+		"rules": {
+			"react-hooks/rules-of-hooks": "error",
+			"react-hooks/exhaustive-deps": "warn"
+		}
+	}
+}
