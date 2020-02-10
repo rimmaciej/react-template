@@ -1,14 +1,17 @@
+// General webpack config, both dev and dist modes build on it
 'use strict';
-const path = require('path');
 
+const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	// Specify entry files
 	entry: {
 		main: './src/index.jsx'
 	},
 
+	// Specify output directory (./dist) and bundle name format
 	output: {
 		filename: 'js/[name].[hash].js',
 		path: path.resolve(__dirname, '../dist')
@@ -16,45 +19,37 @@ module.exports = {
 
 	module: {
 		rules: [
+			// Compile .js and .jsx files with babel
 			{
 				test: /\.(js|jsx)$/,
 				resolve: { extensions: ['.js', '.jsx'] },
 				exclude: /node_modules/,
 				use: 'babel-loader'
-			},
-			{
-				test: /\.html$/,
-				use: 'html-loader'
-			},
-			{
-				test: /\.(ttf|eot|woff|woff2)$/,
-				use: {
-					loader: 'file-loader',
-					options: {
-						name: 'static/fonts/[name].[ext]'
-					}
-				}
 			}
 		]
 	},
 
 	plugins: [
+		// Inject bundle links into the template html and copy to dist directory
+		// You can specify favicon link here
 		new HtmlPlugin({
-			filename: path.resolve(__dirname, '../dist/index.html'),
-			template: path.resolve(__dirname, '../static/index.html')
+			template: path.resolve(__dirname, '../static/index.html'),
+			filename: path.resolve(__dirname, '../dist/index.html')
 			// favicon: '/assets/icons/favicon.png'
 		}),
+
+		// Copy assets and manifest to dist directory
 		new CopyPlugin([
 			{
 				from: path.resolve(__dirname, '../static/assets'),
 				to: path.resolve(__dirname, '../dist/assets'),
 				toType: 'dir'
+			},
+			{
+				from: path.resolve(__dirname, '../static/manifest.json'),
+				to: path.resolve(__dirname, '../dist/manifest.json'),
+				toType: 'file'
 			}
-			// {
-			// 	from: path.resolve(__dirname, '../static/manifest.json'),
-			// 	to: path.resolve(__dirname, '../dist/manifest.json'),
-			// 	toType: 'file'
-			// }
 		])
 	]
 };
