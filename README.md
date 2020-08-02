@@ -31,9 +31,7 @@ yarn build // run production bundle
 ## Directory structure
 
 -   **/src** stores everything that's dynamic, so mostly react components
-    -   **index.jsx** imports Root component and mounts it
-    -   **components** stores app components
-        -   **Root.jsx** is the main component
+    -   **index.jsx** create global style and mount a basic component
 -   **/static** stores everything that isn't bundled
     -   **index.html** is the basic html template, bundle links are injected into it and it's the file you serve from the dist directory after build
     -   **manifest.json** is the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
@@ -46,38 +44,31 @@ yarn build // run production bundle
 
 ## Router
 
-To use router you need to create history object and a loading component. Then declare the router.  
+This project includes a beta version of react router 6
+
 `React.Suspense` shows `<Loading>` as fallback when new route is loading.  
-`Switch` makes the router display only the first matching route.  
+`Routes` makes the router display only the first matching route.  
 `Route` components are the routes.
 
 ```JSX
 // Imports
-import { Router, Switch, Route } from 'react-router-dom';
-import { createHashHistory } from 'history';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Hash history needed for the router
-const hashHistory = createHashHistory();
 
 // Simple loading component
 const Loading = () => <div>Loading...</div>;
 ```
 
 ```JSX
-<Router history={hashHistory}>
+<Router>
 	{/* Suspense needed for route switching */}
 	<React.Suspense fallback={<Loading />}>
 		{/* Switch ensures only single route is rendered */}
-		<Switch>
+		<Routes>
 			{/* Root route declaration */}
-			<Route path="/" exact>
-				main page
-			</Route>
-
-            <Route path="/about">
-                about page
-            </Route>
-		</Switch>
+			<Route path="/" element={<Main/>} exact/>
+            <Route path="/about" element={<About/>}/>
+		</Routes>
 	</React.Suspense>
 </Router>
 ```

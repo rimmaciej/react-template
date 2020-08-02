@@ -3,7 +3,7 @@
 
 const path = require('path');
 const config = require('./config.js');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const FriendlyErrors = require('friendly-errors-webpack-plugin');
 
@@ -20,8 +20,8 @@ module.exports = merge(config, {
 		quiet: true,
 		overlay: {
 			errors: true,
-			warnings: true
-		}
+			warnings: true,
+		},
 	},
 
 	plugins: [
@@ -31,13 +31,13 @@ module.exports = merge(config, {
 		// Friendly errors plugin shows much more human friendly errors in the console
 		new FriendlyErrors({
 			compilationSuccessInfo: {
-				messages: ['Available at: http://localhost:5000']
-			}
+				messages: ['Available at: http://localhost:5000'],
+			},
 		}),
 
 		// Specify API url to use different urls in dev and dist modes
 		new webpack.DefinePlugin({
-			API_URL: JSON.stringify('http://localhost')
-		})
-	]
+			API_URL: JSON.stringify('http://localhost'),
+		}),
+	],
 });

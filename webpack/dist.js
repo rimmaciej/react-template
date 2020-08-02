@@ -2,7 +2,7 @@
 'use strict';
 
 const config = require('./config.js');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 
 const Terser = require('terser-webpack-plugin');
@@ -13,7 +13,7 @@ module.exports = merge(config, {
 
 	// Configure where the output folder should be
 	output: {
-		publicPath: '/'
+		publicPath: '/',
 	},
 
 	// Specify Terser configuration
@@ -28,11 +28,11 @@ module.exports = merge(config, {
 						dead_code: true,
 						conditionals: true,
 						booleans: true,
-						ecma: 6
-					}
-				}
-			})
-		]
+						ecma: 6,
+					},
+				},
+			}),
+		],
 	},
 
 	plugins: [
@@ -41,7 +41,7 @@ module.exports = merge(config, {
 
 		// Specify API url to use different urls in dev and dist modes
 		new webpack.DefinePlugin({
-			API_URL: JSON.stringify('https://example.com')
-		})
-	]
+			API_URL: JSON.stringify('https://example.com'),
+		}),
+	],
 });
