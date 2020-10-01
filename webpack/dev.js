@@ -9,6 +9,7 @@ const FriendlyErrors = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(config, {
 	mode: 'development',
+	devtool: 'cheap-module-source-map',
 
 	// webpack-dev-server settings
 	devServer: {
@@ -24,6 +25,14 @@ module.exports = merge(config, {
 		},
 	},
 
+	resolve: {
+		alias: {
+			Root: path.resolve(__dirname, '../src/'),
+			Components: path.resolve(__dirname, '../src/components/'),
+			Pages: path.resolve(__dirname, '../src/pages/'),
+		},
+	},
+
 	plugins: [
 		// Replace modules without stopping webpack-dev-server
 		new webpack.HotModuleReplacementPlugin(),
@@ -33,11 +42,6 @@ module.exports = merge(config, {
 			compilationSuccessInfo: {
 				messages: ['Available at: http://localhost:5000'],
 			},
-		}),
-
-		// Specify API url to use different urls in dev and dist modes
-		new webpack.DefinePlugin({
-			API_URL: JSON.stringify('http://localhost'),
 		}),
 	],
 });
