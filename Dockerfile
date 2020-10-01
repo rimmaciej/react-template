@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:13-alpine as build
+FROM node:14-alpine as build
 
 # Create app directory
 RUN mkdir -p /app
@@ -10,7 +10,7 @@ WORKDIR /app
 RUN yarn install --silent && yarn build
 
 # Stage 2: Host
-FROM nginx:1.17-alpine
+FROM nginx:1.19-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
